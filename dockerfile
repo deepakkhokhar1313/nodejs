@@ -1,9 +1,12 @@
 FROM centos:latest
 MAINTAINER khokharshab
-RUN yum install -y httpd  
+RUN yum install -y httpd \
+  zip \
+ unzip 
+ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
 WORKDIR /var/www/html
-RUN git clone https://github.com/deepakkhokhar1313/nodejs.git 
-RUN cp -rvf nodejs/* .
-RUN rm -rf nodejs 
+RUN unzip photogenic.zip
+RUN cp -rvf photogenic/* .
+RUN rm -rf photogenic photogenic.zip 
 CMD ["/usr/sbin/httpd", "-D",  "FOREGROUND"]
 EXPOSE 80
